@@ -38,7 +38,7 @@ inter = regr.intercept_
 #print(inter)
 
 #plt.scatter(train.ENGINESIZE,train.CO2EMISSION,color = 'blue')
-#XX = np.arrange(0,10,0.1)
+#XX = np.arange(0,10,0.1)
 #YY = inter[0] + coef[0][1]*XX + coef[0][2]*np.power(XX,2) + coef[0][3]*np.power(XX,3)
 #plt.plot(XX,YY,color = 'red')
 #plt.xlabel('Engine Size')
@@ -57,10 +57,11 @@ VS = r2_score(test_y,test_y_poly)
 
 app = FastAPI()
 class PredictionInput(BaseModel):
-  ENGINESIZE: int
+  ENGINESIZE: float
 
 @app.post("/predict")
 def predict(input_data: PredictionInput):
   features = [[input_data.ENGINESIZE]]
-  prediction = regr.predict(features)
+  test_x_poly1 = poly.transform(features)
+  prediction = regr.predict(test_x_poly1)
   return{"prediction":str(prediction[0])}  
