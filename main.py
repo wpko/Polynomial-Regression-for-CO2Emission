@@ -33,7 +33,7 @@ train_x_poly = poly.fit_transform(train_x)
 regr.fit(train_x_poly,train_y)
 
 coef = regr.coef_
-inter = regr.initercept_
+inter = regr.intercept_
 #print(coef)
 #print(inter)
 
