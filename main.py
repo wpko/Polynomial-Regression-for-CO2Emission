@@ -65,6 +65,13 @@ VS = r2_score(test_y,test_y_poly)
 #print('Variance Square = ',VS)
 
 app = FastAPI()
+app.add_middleware(
+  CORSMiddleware,
+  allow_origins=["*"],
+  allow_crendentails=True,
+  allow_methods=["*"],
+  allow_heades=["*"],
+)
 class PredictionInput(BaseModel):
   ENGINESIZE: float
 
