@@ -4,6 +4,15 @@ import matplotlib.pyplot as plt
 from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+  CORSMiddleware,
+  allow_origins=["*"],
+  allow_crendentails=True,
+  allow_methods=["*"]
+  allow_heades=["*"],
+)
 
 df = pd.read_csv('CO2_Emission.csv')
 #df.head()
@@ -45,7 +54,7 @@ inter = regr.intercept_
 #plt.ylabel('CO2 Emission')
 
 test_x_poly = poly.transform(test_x)
-test_y_poly = regr.predict(test_x)
+test_y_poly = regr.predict(test_x_poly)
 
 MAE = np.mean(np.absolute(test_y_poly-test_y))
 MSE = np.mean((test_y_poly-test_y)**2)
