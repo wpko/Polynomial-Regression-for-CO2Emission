@@ -59,7 +59,7 @@ VS = r2_score(test_y,test_y_poly)
 app = FastAPI()
 app.add_middleware(
   CORSMiddleware,
-  allow_origins=["*"],
+  allow_origins=["https://wpko.github.io/Drug-Prediction-Frontend/"],
   allow_crendentails=True,
   allow_methods=["*"],
   allow_heades=["*"],
