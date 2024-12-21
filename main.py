@@ -57,16 +57,22 @@ VS = r2_score(test_y,test_y_poly)
 #print('Variance Square = ',VS)
 
 app = FastAPI()
-app.add_middleware(
-  CORSMiddleware,
-  allow_origins=["*"],
-  allow_crendentails=True,
-  allow_methods=["*"],
-  allow_heades=["*"],
-)
 class PredictionInput(BaseModel):
   ENGINESIZE: float
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+  CORSMiddleware,
+  allow_origins=["*"],
+  allow_methods=["*"],
+  allow_heades=["*"],
+)
+
+@app.get("/")
+def read_root():
+    return {"message": "Service is live!"}
+  
 @app.post("/predict")
 def predict(input_data: PredictionInput):
   features = [[input_data.ENGINESIZE]]
